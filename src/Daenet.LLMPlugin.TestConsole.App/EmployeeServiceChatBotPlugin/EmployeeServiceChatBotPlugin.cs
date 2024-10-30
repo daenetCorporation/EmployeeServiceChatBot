@@ -101,7 +101,9 @@ namespace Daenet.LLMPlugin.TestConsole.App.EmployeeServiceChatBotPlugin
                     foreach (var order in customer.Orders)
                     {
                         sb.AppendLine($"Order name: {order.OrderName}");
-                        //sb.AppendLine($"Activities: {string.Join(", ", order.Activities)}");
+                        if (order.Activities == null)
+                            continue;
+                        sb.AppendLine($"Activities: {string.Join(", ", order.Activities)}");
                     }
                 }
             }

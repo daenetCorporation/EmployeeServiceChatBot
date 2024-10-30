@@ -41,11 +41,6 @@ namespace Daenet.LLMPlugin.TestConsole.App.EmployeeServiceChatBotPlugin
         [Description("Book working hours")]
         public string BookWorkingHoursWithHours([Description("Project name.")] string projectName, [Description("hours to be booked")] int hours, [Description("date when to book the hours")] DateTime date)
         {
-
-            if (hours <= 0)
-            {
-                return "please provide a valid number of hours";
-            }
             /*
              * here we book the working hours for the project base on the project name and the number of hours
              */

@@ -29,16 +29,11 @@ namespace Daenet.LLMPlugin.TestConsole.App.EmployeeServiceChatBotPlugin
         [Description("Returns a list of locations")]
         public string GetLocations([Description("If provided, the locations returned are filtered.")] string locationFilter = null)
         {
-            var locations =  serviceApi.GetLocationAsync().Result;
+            var locations = serviceApi.GetLocationAsync().Result;
             return locations.Where(l => string.IsNullOrEmpty(locationFilter) || l.Name.Contains(locationFilter)).Select(d => d.Name).Aggregate((a, b) => a + Environment.NewLine + b);
         }
 
-            /*
-             * here we get the remaining hours base on the project name 
-             */
-
-            return "Remaining hours for the project are 100.";
-        }
+        #region Project Management
 
         [KernelFunction]
         [Description("Book the working for the project using hours and date")]
@@ -84,12 +79,8 @@ namespace Daenet.LLMPlugin.TestConsole.App.EmployeeServiceChatBotPlugin
             return "The deadline of the project is 12/12/2022.";
         }
 
+
         #endregion
-
-
-
-
-
 
         [KernelFunction]
         [Description("Provides the list of names of processes")]

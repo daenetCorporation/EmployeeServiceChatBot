@@ -41,11 +41,6 @@ namespace Daenet.LLMPlugin.TestConsole.App.EmployeeServiceChatBotPlugin
         [Description("Book working hours")]
         public string BookWorkingHoursWithHours([Description("Project name.")] string projectName, [Description("hours to be booked")] int hours, [Description("date when to book the hours")] DateTime date)
         {
-
-            if (hours <= 0)
-            {
-                return "please provide a valid number of hours";
-            }
             /*
              * here we book the working hours for the project base on the project name and the number of hours
              */
@@ -84,7 +79,7 @@ namespace Daenet.LLMPlugin.TestConsole.App.EmployeeServiceChatBotPlugin
              * here we get the deadline of the project base on the project name 
              */
 
-            return "The deadline of the project is 12/12/2022.";
+            return $"The deadline of the project {projectName} is 12/31/2022.";
         }
 
 
@@ -107,32 +102,13 @@ namespace Daenet.LLMPlugin.TestConsole.App.EmployeeServiceChatBotPlugin
                     foreach (var order in customer.Orders)
                     {
                         sb.AppendLine($"Order name: {order.OrderName}");
-                        //sb.AppendLine($"Activities: {string.Join(", ", order.Activities)}");
+                        if (order.Activities == null)
+                            continue;
+                        sb.AppendLine($"Activities: {string.Join(", ", order.Activities)}");
                     }
                 }
             }
             return sb.ToString();
         }
-
-        [KernelFunction]
-        [Description("Provides the list of names of processes")]
-        public string GetProcessInfo([Description("If set in true, it provides the detaile process information.")] bool provideDetailedInfo = false)
-        {
-            StringBuilder sb = new StringBuilder();
-
-            foreach (Process proc in Process.GetProcesses().ToList())
-            {
-                sb.AppendLine($"Proce name: {proc.ProcessName}");
-                if (provideDetailedInfo)
-                {
-                    sb.AppendLine($"Proces ID: {proc.Id}"); ;
-                    sb.AppendLine($"Proces working set: {proc.WorkingSet64}");
-                    sb.AppendLine("---------------------------------------------");
-                }
-            }
-
-            return sb.ToString();
-        }
-
     }
 }

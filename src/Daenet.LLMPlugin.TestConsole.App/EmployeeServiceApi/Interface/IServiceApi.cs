@@ -10,5 +10,6 @@ namespace Daenet.LLMPlugin.TestConsole.App.EmployeeServiceApi.Interface
     public interface IServiceApi
     {
         Task<EmployeeBookedResult> BookWorkingHour(CustomerDTO customerInfo, DateOnly bookDate, TimeSpan hourToBook, TimeOnly startTime);
+        Task<IEnumerable<Location>> GetLocationAsync();
     }
 }

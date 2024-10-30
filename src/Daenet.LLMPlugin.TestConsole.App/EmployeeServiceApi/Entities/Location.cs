@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Daenet.LLMPlugin.TestConsole.App.EmployeeServiceApi.Entities
 {
-    internal class Location
+    public class Location
     {
         public int Id { get; set; }
 

@@ -1,4 +1,5 @@
 ﻿using Azure;
+using Daenet.LLMPlugin.TestConsole.App.EmployeeServiceApi.Interface;
 using Microsoft.SemanticKernel;
 using System;
 using System.Collections.Generic;
@@ -15,24 +16,21 @@ namespace Daenet.LLMPlugin.TestConsole.App.EmployeeServiceChatBotPlugin
     public class EmployeeServiceChatBotPlugin
     {
         private readonly EmployeeServiceChatBotPluginConfig _cfg;
+        private readonly IServiceApi serviceApi;
 
-        public EmployeeServiceChatBotPlugin(EmployeeServiceChatBotPluginConfig cfg)
+        public EmployeeServiceChatBotPlugin(EmployeeServiceChatBotPluginConfig cfg, IServiceApi serviceApi)
         {
+
             _cfg = cfg;
+            this.serviceApi = serviceApi;
         }
 
         [KernelFunction]
         [Description("Returns a list of locations")]
         public string GetLocations([Description("If provided, the locations returned are filtered.")] string locationFilter = null)
         {
-            List<string> list = new List<string>();
-            list.Add("Berlin");
-            list.Add("Zürich");
-            list.Add("München");
-            list.Add("Frankfurt");
-            list.Add("Zagreb");
-
-            return list.Where(l => string.IsNullOrEmpty(locationFilter) || l.Contains(locationFilter)).Aggregate((a, b) => a + Environment.NewLine + b);
+            var locations =  serviceApi.GetLocationAsync().Result;
+            return locations.Where(l => string.IsNullOrEmpty(locationFilter) || l.Name.Contains(locationFilter)).Select(d => d.Name).Aggregate((a, b) => a + Environment.NewLine + b);
         }
 
 

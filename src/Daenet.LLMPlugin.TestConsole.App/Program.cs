@@ -30,7 +30,7 @@ namespace Daenet.LLMPlugin.TestConsole.App
 
             // Register the provider for creating instances of plugins.
             serviceCollection.AddSingleton<IPlugInProvider, DefaultPlugInProvider>();
-            se
+
 
             // Register the configuration with the dependency injection container.
             serviceCollection.AddSingleton<PluginManager>();

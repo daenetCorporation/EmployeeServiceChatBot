@@ -27,5 +27,10 @@ namespace Daenet.LLMPlugin.TestConsole
         /// The assistent output color.
         /// </summary>
         public ConsoleColor AssistentMessageColor { get; set; } = ConsoleColor.White;
+
+        /// <summary>
+        /// The system message used to initialize the conversation..
+        /// </summary>
+        public string SystemMessage { get; set; } = "";
     }
 }

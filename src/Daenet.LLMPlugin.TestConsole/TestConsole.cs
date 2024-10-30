@@ -44,6 +44,8 @@ namespace Daenet.LLMPlugin.TestConsole
             // Create chat history
             var history = new ChatHistory();
 
+            history.AddMessage(AuthorRole.System, _consoleCfg.SystemMessage);
+
             ImportPlugins(kernel, history);
 
             // Get chat completion service

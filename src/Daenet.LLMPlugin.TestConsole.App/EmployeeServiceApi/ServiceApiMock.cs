@@ -23,7 +23,7 @@ namespace Daenet.LLMPlugin.TestConsole.App.EmployeeServiceApi
             return Locations;
         }
 
-        private static List<Customer> _customers = new List<Customer>()
+        private static IEnumerable<Customer> _customers = new List<Customer>()
         {
             new()
             {
@@ -51,6 +51,13 @@ namespace Daenet.LLMPlugin.TestConsole.App.EmployeeServiceApi
                 ]
             }
         };
+
+
+        public async Task<IEnumerable<Customer>> GetCustomersAsync()
+        {
+            return _customers;
+        }
+
         public async Task<EmployeeBookedResult> BookWorkingHour(CustomerDTO customerInfo, DateOnly bookDate, TimeSpan hourToBook, TimeOnly startTime)
         {
             var customerInDb = _customers.FirstOrDefault(c => c.CustomerName == customerInfo.CustomerName);

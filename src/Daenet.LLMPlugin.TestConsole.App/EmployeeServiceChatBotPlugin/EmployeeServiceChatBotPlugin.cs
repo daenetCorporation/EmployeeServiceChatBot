@@ -35,6 +35,30 @@ namespace Daenet.LLMPlugin.TestConsole.App.EmployeeServiceChatBotPlugin
 
 
         [KernelFunction]
+        [Description("Provides the list of customers")]
+        public string GetProjectInfo([Description("If set in true, it provides the list of orders for each customer")] bool provideOrderInfo = false)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            var customers = serviceApi.GetCustomersAsync().Result;
+
+            foreach (var customer in customers)
+            {
+                sb.AppendLine($"Customer name: {customer.CustomerName}");
+
+                if(provideOrderInfo)
+                {
+                    foreach (var order in customer.Orders)
+                    {
+                        sb.AppendLine($"Order name: {order.OrderName}");
+                        //sb.AppendLine($"Activities: {string.Join(", ", order.Activities)}");
+                    }
+                }
+            }
+            return sb.ToString();
+        }
+
+        [KernelFunction]
         [Description("Provides the list of names of processes")]
         public string GetProcessInfo([Description("If set in true, it provides the detaile process information.")] bool provideDetailedInfo = false)
         {

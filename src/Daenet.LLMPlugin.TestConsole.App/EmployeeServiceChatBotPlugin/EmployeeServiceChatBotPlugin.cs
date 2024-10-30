@@ -1,35 +1,26 @@
-﻿using Azure;
-using Daenet.LLMPlugin.TestConsole.App.EmployeeServiceApi.Interface;
+﻿using Daenet.LLMPlugin.TestConsole.App.EmployeeServiceApi.Interface;
 using Microsoft.SemanticKernel;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
-using System.Linq;
-using System.Net;
-using System.Net.Sockets;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Daenet.LLMPlugin.TestConsole.App.EmployeeServiceChatBotPlugin
 {
     public class EmployeeServiceChatBotPlugin
     {
         private readonly EmployeeServiceChatBotPluginConfig _cfg;
-        private readonly IServiceApi serviceApi;
+        private readonly IServiceApi _serviceApi;
 
         public EmployeeServiceChatBotPlugin(EmployeeServiceChatBotPluginConfig cfg, IServiceApi serviceApi)
         {
-
             _cfg = cfg;
-            this.serviceApi = serviceApi;
+            _serviceApi = serviceApi;
         }
 
         [KernelFunction]
         [Description("Returns a list of locations")]
         public string GetLocations()
         {
-            var locations = serviceApi.GetLocationAsync().Result;
+            var locations = _serviceApi.GetLocationAsync().Result;
             string filt = "Do not list all locations, if user filtered but no result found. Locations: ";
 
             return filt + String.Join(',', locations.Select(d => d.Name).ToList());
@@ -102,7 +93,7 @@ namespace Daenet.LLMPlugin.TestConsole.App.EmployeeServiceChatBotPlugin
         {
             StringBuilder sb = new StringBuilder();
 
-            var customers = serviceApi.GetCustomersAsync().Result;
+            var customers = _serviceApi.GetCustomersAsync().Result;
 
             foreach (var customer in customers)
             {

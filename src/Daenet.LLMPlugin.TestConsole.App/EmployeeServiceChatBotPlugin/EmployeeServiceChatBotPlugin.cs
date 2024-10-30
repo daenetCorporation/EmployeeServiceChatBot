@@ -100,26 +100,5 @@ namespace Daenet.LLMPlugin.TestConsole.App.EmployeeServiceChatBotPlugin
             }
             return sb.ToString();
         }
-
-        [KernelFunction]
-        [Description("Provides the list of names of processes")]
-        public string GetProcessInfo([Description("If set in true, it provides the detaile process information.")] bool provideDetailedInfo = false)
-        {
-            StringBuilder sb = new StringBuilder();
-
-            foreach (Process proc in Process.GetProcesses().ToList())
-            {
-                sb.AppendLine($"Proce name: {proc.ProcessName}");
-                if (provideDetailedInfo)
-                {
-                    sb.AppendLine($"Proces ID: {proc.Id}"); ;
-                    sb.AppendLine($"Proces working set: {proc.WorkingSet64}");
-                    sb.AppendLine("---------------------------------------------");
-                }
-            }
-
-            return sb.ToString();
-        }
-
     }
 }

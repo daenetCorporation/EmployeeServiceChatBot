@@ -43,7 +43,7 @@ namespace Daenet.LLMPlugin.TestConsole.App.EmployeeServiceChatBotPlugin
              * here we book the working hours for the project base on the project name and the number of hours
              */
 
-            var customers = await serviceApi.GetCustomersAsync();
+            var customers = await _serviceApi.GetCustomersAsync();
 
            var project = customers.SelectMany(c => c.Orders).ToList().FirstOrDefault(o => o.OrderName == projectName);
 

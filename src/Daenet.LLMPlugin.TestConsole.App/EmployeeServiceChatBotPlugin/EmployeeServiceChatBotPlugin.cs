@@ -1,4 +1,5 @@
-﻿using Microsoft.SemanticKernel;
+﻿using Azure;
+using Microsoft.SemanticKernel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,6 +19,20 @@ namespace Daenet.LLMPlugin.TestConsole.App.EmployeeServiceChatBotPlugin
         public EmployeeServiceChatBotPlugin(EmployeeServiceChatBotPluginConfig cfg)
         {
             _cfg = cfg;
+        }
+
+        [KernelFunction]
+        [Description("Returns a list of locations")]
+        public string GetLocations([Description("If provided, the locations returned are filtered.")] string locationFilter = null)
+        {
+            List<string> list = new List<string>();
+            list.Add("Berlin");
+            list.Add("Zürich");
+            list.Add("München");
+            list.Add("Frankfurt");
+            list.Add("Zagreb");
+
+            return list.Where(l => string.IsNullOrEmpty(locationFilter) || l.Contains(locationFilter)).Aggregate((a, b) => a + Environment.NewLine + b);
         }
 
 

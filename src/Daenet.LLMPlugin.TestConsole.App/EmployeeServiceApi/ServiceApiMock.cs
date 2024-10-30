@@ -10,6 +10,14 @@ namespace Daenet.LLMPlugin.TestConsole.App.EmployeeServiceApi
 {
     public class ServiceApiMock : IServiceApi
     {
+        private static List<Location> _locations = new List<Location>()
+        {
+            new() {Id = 1, Name = "Berlin"},
+            new() {Id = 2, Name = "München"},
+            new() {Id = 3, Name = "Frankfurt"},
+            new() {Id = 3, Name = "Zagreb"}
+        };
+
         private static List<Customer> _customers = new List<Customer>()
         {
             new()

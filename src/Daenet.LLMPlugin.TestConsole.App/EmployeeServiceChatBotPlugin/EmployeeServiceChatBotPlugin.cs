@@ -69,7 +69,7 @@ namespace Daenet.LLMPlugin.TestConsole.App.EmployeeServiceChatBotPlugin
              * here we get the deadline of the project base on the project name 
              */
 
-            return "The deadline of the project is 12/12/2022.";
+            return $"The deadline of the project {projectName} is 12/31/2022.";
         }
 
 

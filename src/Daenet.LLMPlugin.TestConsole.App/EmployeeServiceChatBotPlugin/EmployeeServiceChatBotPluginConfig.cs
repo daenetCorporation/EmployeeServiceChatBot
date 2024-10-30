@@ -10,7 +10,7 @@ namespace Daenet.LLMPlugin.TestConsole.App.EmployeeServiceChatBotPlugin
     {
         public string BaseUrl { get; set; }
         public string ClientId { get; set; }
-        public string ClientSecrete { get; set; }
+        public string ClientSecret { get; set; }
         public string TenantId { get; set; }
         public string ApplicationUrl { get; set; }
 

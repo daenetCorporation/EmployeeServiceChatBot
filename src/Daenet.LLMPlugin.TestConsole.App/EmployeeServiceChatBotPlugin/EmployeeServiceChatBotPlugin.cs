@@ -38,13 +38,9 @@ namespace Daenet.LLMPlugin.TestConsole.App.EmployeeServiceChatBotPlugin
         #region Project Management
 
         [KernelFunction]
-        [Description("Book the working for the project using hours and date")]
-        public string BookWorkingHoursWithHours([Description("The project name")] string projectName, [Description("hours")] int hours, [Description("date")] DateOnly date)
+        [Description("Book working hours")]
+        public string BookWorkingHoursWithHours([Description("Project name.")] string projectName, [Description("hours to be booked")] int hours, [Description("date when to book the hours")] DateTime date)
         {
-            if (string.IsNullOrEmpty(projectName))
-            {
-                return "the project name is missing please provide it";
-            }
 
             if (hours <= 0)
             {
@@ -58,16 +54,16 @@ namespace Daenet.LLMPlugin.TestConsole.App.EmployeeServiceChatBotPlugin
         }
 
 
-        [KernelFunction]
-        [Description("Book the working hour for the project")]
-        public string BookWorkingHoursWithDateTime([Description("project name")] string projectName, [Description("starting datetime")] DateTime start, [Description("ending datetime")] DateTime end)
-        {
-            /*
-             * here we book the working hours for the project base on the project name and the number of hours
-             */
+        //[KernelFunction]
+        //[Description("Book the working hour for the project")]
+        //public string BookWorkingHoursWithDateTime([Description("project name")] string projectName, [Description("starting datetime")] DateTime start, [Description("ending datetime")] DateTime end)
+        //{
+        //    /*
+        //     * here we book the working hours for the project base on the project name and the number of hours
+        //     */
 
-            return $"The working hours from {start} to {end} for the project {projectName} are booked successfully.";
-        }
+        //    return $"The working hours from {start} to {end} for the project {projectName} are booked successfully.";
+        //}
 
 
         [KernelFunction]

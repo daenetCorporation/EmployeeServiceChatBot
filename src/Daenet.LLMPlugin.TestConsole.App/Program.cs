@@ -36,7 +36,8 @@ namespace Daenet.LLMPlugin.TestConsole.App
             serviceCollection.AddSingleton<PluginManager>();
 
             // Register TestConsoleConfig with the dependency injection container.
-            serviceCollection.AddSingleton<TestConsoleConfig>(new TestConsoleConfig() { SystemPrompt = "-> " });
+            serviceCollection.AddSingleton<TestConsoleConfig>(new TestConsoleConfig()
+            { SystemPrompt = "-> ",SystemMessage = "You are running in germany. The current DateTime is " + DateTime.Now });
 
             // Register the configuration of the built-in plugin.
             serviceCollection.AddSingleton<TestConsole>();

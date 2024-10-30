@@ -1,6 +1,8 @@
 ﻿//using Daenet.EmbeddingSearchApi.Services;
 using Daenet.LLMPlugin.Common;
 using Daenet.LLMPlugin.TestConsole;
+using Daenet.LLMPlugin.TestConsole.App.EmployeeServiceApi;
+using Daenet.LLMPlugin.TestConsole.App.EmployeeServiceApi.Interface;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -28,6 +30,7 @@ namespace Daenet.LLMPlugin.TestConsole.App
 
             // Register the provider for creating instances of plugins.
             serviceCollection.AddSingleton<IPlugInProvider, DefaultPlugInProvider>();
+            se
 
             // Register the configuration with the dependency injection container.
             serviceCollection.AddSingleton<PluginManager>();
@@ -40,6 +43,10 @@ namespace Daenet.LLMPlugin.TestConsole.App
 
             UseSemanticSearchApi(cfg, serviceCollection);
 
+            //register service API
+            if (Environment.GetEnvironmentVariable("IsServiceMock") != null && Environment.GetEnvironmentVariable("IsServiceMock") == "true")
+                serviceCollection.AddSingleton<IServiceApi, ServiceApiMock>();
+            
             // Build the service provider.
             var serviceProvider = serviceCollection.BuildServiceProvider();
 

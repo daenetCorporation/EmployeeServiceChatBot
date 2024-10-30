@@ -37,9 +37,16 @@ namespace Daenet.LLMPlugin.TestConsole.App.EmployeeServiceChatBotPlugin
 
         #region Project Management
 
+        /// <summary>
+        /// Book the working hour for the project
+        /// </summary>
+        /// <param name="projectName">name of the project</param>
+        /// <param name="hours">number of working hours</param>
+        /// <param name="date">the date for booking</param>
+        /// <returns>string content notify about the booked hours</returns>
         [KernelFunction]
         [Description("Book working hours")]
-        public string BookWorkingHoursWithHours([Description("Project name.")] string projectName, [Description("hours to be booked")] int hours, [Description("date when to book the hours")] DateTime date)
+        public async Task<string> BookWorkingHoursWithHoursAsync([Description("Project name.")] string projectName, [Description("hours to be booked")] int hours, [Description("date when to book the hours")] DateTime date)
         {
             /*
              * here we book the working hours for the project base on the project name and the number of hours
@@ -70,7 +77,11 @@ namespace Daenet.LLMPlugin.TestConsole.App.EmployeeServiceChatBotPlugin
         //    return $"The working hours from {start} to {end} for the project {projectName} are booked successfully.";
         //}
 
-
+        /// <summary>
+        /// Get the deadline/ending date of the project
+        /// </summary>
+        /// <param name="projectName">name of the project</param>
+        /// <returns></returns>
         [KernelFunction]
         [Description("Get the deadline/ending date of the project")]
         public string GetProjectDeadline([Description("The project name")] string projectName)

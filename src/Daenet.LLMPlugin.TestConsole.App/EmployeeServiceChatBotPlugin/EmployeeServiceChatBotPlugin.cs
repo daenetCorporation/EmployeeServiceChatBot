@@ -50,6 +50,16 @@ namespace Daenet.LLMPlugin.TestConsole.App.EmployeeServiceChatBotPlugin
              * here we book the working hours for the project base on the project name and the number of hours
              */
 
+            var customers = await serviceApi.GetCustomersAsync();
+
+           var project = customers.SelectMany(c => c.Orders).ToList().FirstOrDefault(o => o.OrderName == projectName);
+
+            if (project == null)
+            {
+                return $"The project {projectName} is not found.";
+            }
+
+
             return $"you booked {hours} hour in the project {projectName} on date {date}";
         }
 
@@ -92,7 +102,7 @@ namespace Daenet.LLMPlugin.TestConsole.App.EmployeeServiceChatBotPlugin
             {
                 sb.AppendLine($"Customer name: {customer.CustomerName}");
 
-                if(provideOrderInfo)
+                if (provideOrderInfo)
                 {
                     foreach (var order in customer.Orders)
                     {

@@ -12,8 +12,7 @@
 		<!--<PackageReference Include="Daenet.EmbeddingSearchApi" Version="1.8.2" />-->
 	</ItemGroup>
 
-	<ItemGroup>
-		<ProjectReference Include="..\..\..\..\daenet\openai-prompts\src\Daenet.SemanticSearchService\Daenet.EmbeddingSearchApi\Daenet.EmbeddingSearchApi.Api.csproj" />
+	<ItemGroup>		
 		<ProjectReference Include="..\Daenet.LLMPlugin.Common\Daenet.LLMPlugin.Common.csproj" />
 		<ProjectReference Include="..\Daenet.LLMPlugin.TestConsole\Daenet.LLMPlugin.TestConsole.csproj" />
 	</ItemGroup>
@@ -28,6 +27,10 @@
 		<None Update="appsettings.json">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Plugin2\" />
 	</ItemGroup>
 
 </Project>

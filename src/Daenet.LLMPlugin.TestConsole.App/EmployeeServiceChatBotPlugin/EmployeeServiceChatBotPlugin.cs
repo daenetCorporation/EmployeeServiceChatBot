@@ -1,4 +1,6 @@
-﻿using Microsoft.SemanticKernel;
+﻿using Azure;
+using Daenet.LLMPlugin.TestConsole.App.EmployeeServiceApi.Interface;
+using Microsoft.SemanticKernel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,31 +16,22 @@ namespace Daenet.LLMPlugin.TestConsole.App.EmployeeServiceChatBotPlugin
     public class EmployeeServiceChatBotPlugin
     {
         private readonly EmployeeServiceChatBotPluginConfig _cfg;
+        private readonly IServiceApi serviceApi;
 
-        //private readonly EmployeeService _service;
-
-        public EmployeeServiceChatBotPlugin(EmployeeServiceChatBotPluginConfig cfg)
+        public EmployeeServiceChatBotPlugin(EmployeeServiceChatBotPluginConfig cfg, IServiceApi serviceApi)
         {
+
             _cfg = cfg;
-            //_service = new EmployeeService("", new HttpClient());
+            this.serviceApi = serviceApi;
         }
 
-
-        #region Project kernel functions
         [KernelFunction]
-        [Description("Provide the remaining hours for the project of a customer")]
-        public string GetProjectRemainingHours([Description("The customer name")] string customerName, [Description("The project name")] string projectName)
+        [Description("Returns a list of locations")]
+        public string GetLocations([Description("If provided, the locations returned are filtered.")] string locationFilter = null)
         {
-
-            if (string.IsNullOrEmpty(customerName))
-            {
-                return "Please provide the customerName";
-            }
-
-            if (string.IsNullOrEmpty(projectName))
-            {
-                return "Please provide the projectName";
-            }
+            var locations =  serviceApi.GetLocationAsync().Result;
+            return locations.Where(l => string.IsNullOrEmpty(locationFilter) || l.Name.Contains(locationFilter)).Select(d => d.Name).Aggregate((a, b) => a + Environment.NewLine + b);
+        }
 
             /*
              * here we get the remaining hours base on the project name 

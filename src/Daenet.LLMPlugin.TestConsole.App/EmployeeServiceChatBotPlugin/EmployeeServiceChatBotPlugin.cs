@@ -27,10 +27,12 @@ namespace Daenet.LLMPlugin.TestConsole.App.EmployeeServiceChatBotPlugin
 
         [KernelFunction]
         [Description("Returns a list of locations")]
-        public string GetLocations([Description("If provided, the locations returned are filtered.")] string locationFilter = null)
+        public string GetLocations()
         {
-            var locations =  serviceApi.GetLocationAsync().Result;
-            return locations.Where(l => string.IsNullOrEmpty(locationFilter) || l.Name.Contains(locationFilter)).Select(d => d.Name).Aggregate((a, b) => a + Environment.NewLine + b);
+            var locations = serviceApi.GetLocationAsync().Result;
+            string filt = "Do not list all locations, if user filtered but no result found. Locations: ";
+
+            return filt + String.Join(',', locations.Select(d => d.Name).ToList());
         }
 
 

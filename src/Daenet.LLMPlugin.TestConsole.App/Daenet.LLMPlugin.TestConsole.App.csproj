@@ -8,6 +8,12 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <Compile Remove="Plugin2\**" />
+	  <EmbeddedResource Remove="Plugin2\**" />
+	  <None Remove="Plugin2\**" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
 		<!--<PackageReference Include="Daenet.EmbeddingSearchApi" Version="1.8.2" />-->
 	</ItemGroup>
@@ -27,10 +33,6 @@
 		<None Update="appsettings.json">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Plugin2\" />
 	</ItemGroup>
 
 </Project>
